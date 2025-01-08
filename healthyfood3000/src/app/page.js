@@ -1,4 +1,5 @@
-import Image from 'next/image'
+import Image from 'next/image';
+import Link from "next/link";
 
 export default function Home() {
 
@@ -7,10 +8,10 @@ export default function Home() {
 
       <header className="bg-green-600 text-white py-6 shadow-md">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <h1 className="text-3xl font-bold tracking-wide">HealthyFood3000</h1>
+          <Link href="/"><h1 className="text-3xl font-bold tracking-wide">HealthyFood3000</h1></Link>
           <nav>
             <ul className="flex space-x-6">
-              <li><a href="#about" className="hover:underline hover:text-green-400 transition duration-300">Über uns</a></li>
+              <li><Link href="/about" className="hover:underline hover:text-green-400 transition duration-300">Über uns</Link></li>
               <li><a href="#products" className="hover:underline hover:text-green-400 transition duration-300">Produkte</a></li>
               <li><a href="#contact" className="hover:underline hover:text-green-400 transition duration-300">Kontakt</a></li>
             </ul>
@@ -26,25 +27,7 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-4 animate__animated animate__fadeIn">Frisch, Gesund, Lecker</h2>
             <p className="text-lg mb-6 animate__animated animate__fadeIn animate__delay-1s">Erleben Sie die Zukunft der gesunden Ernährung mit HealthyFood3000.</p>
             <button className="mt-6 px-6 py-3 bg-white text-green-500 font-semibold rounded-lg hover:bg-green-200 transition-all duration-300 transform hover:scale-105">
-              Mehr erfahren
-            </button>
-          </div>
-        </section>
-
-        <section id="about" className="py-16 bg-green-600 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h3 className="text-3xl font-semibold mb-6 text-shadow-md tracking-wide">Über HealthyFood3000</h3>
-            <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-6 leading-relaxed">
-              Wir bieten gesunde und nachhaltige Lebensmittel, die direkt zu Ihnen nach Hause geliefert werden.
-              Unser Ziel ist es, eine bessere Zukunft für Ernährung und Umwelt zu schaffen. Erleben Sie den Unterschied
-              mit frischen, lokal produzierten Zutaten – jeden Tag.
-            </p>
-            <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-8 leading-relaxed">
-              HealthyFood3000 ist mehr als nur ein Lebensmittel-Lieferdienst. Wir setzen auf Nachhaltigkeit, Qualität und
-              Frische – direkt aus der Region.
-            </p>
-            <button className="px-8 py-4 bg-white text-green-600 font-semibold rounded-lg shadow-lg hover:bg-green-200 transition-all duration-300 transform hover:scale-105">
-              Mehr erfahren
+              <Link href="/about">Mehr erfahren</Link>
             </button>
           </div>
         </section>
@@ -58,7 +41,7 @@ export default function Home() {
               Entdecken Sie unser breites Sortiment an frischen, biologischen und nachhaltigen Lebensmitteln.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {/* FoodBox Item */}
+              {/* FoodBox Common Item */}
               <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition duration-500 ease-in-out hover:shadow-xl">
                 <div className="relative mb-4">
                   <Image
@@ -66,27 +49,55 @@ export default function Home() {
                     alt="Normale FoodBox"
                     width={500}
                     height={300}
-                    className="object-cover rounded-lg transition-transform duration-500 ease-in-out transform hover:scale-110"
+                    className="object-cover rounded-lg w-full h-64 transition-transform duration-500 ease-in-out transform hover:scale-110"
                   />
                 </div>
-                <h4 className="text-lg font-bold mb-2 text-gray-800">FoodBox</h4>
+                <h4 className="text-lg font-bold mb-2 text-gray-800">Common FoodBox</h4>
                 <p className="text-gray-600 mb-4">Frisch, gesund und nachhaltig – die perfekte Wahl für Ihre Ernährung.</p>
                 <p className="text-green-600 text-xl font-semibold">20 CHF / Monat</p>
+                <Link href={`/subscribe/CommonFoodBox`}>
+                  <button className="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
+                    Abo abschliessen
+                  </button>
+                </Link>
+              </div>
+
+              {/* FoodBox medium Item */}
+              <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition duration-500 ease-in-out hover:shadow-xl">
+                <div className="relative mb-4">
+                  <Image
+                    src="/pic/healthyfood_medium.png"
+                    alt="Medium FoodBox"
+                    width={500}
+                    height={300}
+                    className="object-cover rounded-lg w-full h-64 transition-transform duration-500 ease-in-out transform hover:scale-110"
+                  />
+                </div>
+                <h4 className="text-lg font-bold mb-2 text-gray-800">Medium FoodBox</h4>
+                <p className="text-gray-600 mb-4">Organisiert, Grössere Auswahl, Frisch, gesund und nachhaltig – die perfekte Wahl für organisierte Ernährung.</p>
+                <p className="text-green-600 text-xl font-semibold">30 CHF / Monat</p>
                 <button className="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
-                  Abo abschließen
+                  Abo abschliessen
                 </button>
               </div>
 
-              {/* Gemüse Item */}
+              {/* FoodBox deluxe */}
               <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition duration-500 ease-in-out hover:shadow-xl">
-                <h4 className="text-lg font-bold mb-2 text-gray-800">Gemüse</h4>
-                <p className="text-gray-600">Direkt vom Feld.</p>
-              </div>
-
-              {/* Snacks Item */}
-              <div className="bg-white shadow-lg rounded-lg p-6 hover:scale-105 transform transition duration-500 ease-in-out hover:shadow-xl">
-                <h4 className="text-lg font-bold mb-2 text-gray-800">Snacks</h4>
-                <p className="text-gray-600">Gesund und nachhaltig.</p>
+                <div className="relative mb-4">
+                  <Image
+                    src="/pic/healthyfood_deluxe.png"
+                    alt="Normale FoodBox"
+                    width={500}
+                    height={300}
+                    className="object-cover rounded-lg w-full h-64 transition-transform duration-500 ease-in-out transform hover:scale-110"
+                  />
+                </div>
+                <h4 className="text-lg font-bold mb-2 text-gray-800">Deluxe FoodBox</h4>
+                <p className="text-gray-600 mb-4">Wellness, Spa, Obst, gesunde Gerichte, alles was man sich vorstellen kann – die perfekte Wahl für langfristige Gesundheit.</p>
+                <p className="text-green-600 text-xl font-semibold">100 CHF / Monat</p>
+                <button className="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
+                  Abo abschliessen
+                </button>
               </div>
             </div>
           </div>
