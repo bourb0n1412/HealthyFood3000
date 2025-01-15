@@ -1,23 +1,76 @@
+"use client"
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from "next/link";
 
 export default function Home() {
+  // State für das Hamburger-Menü
+  const [isOpen, setIsOpen] = useState(false);
 
+  // Funktion zum Umschalten des Menüs
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div className="bg-gray-50 text-gray-800">
 
-      <header className="bg-green-600 text-white py-6 shadow-md">
+      {/* Navbar */}
+      <header className="bg-green-600 text-white py-6 shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link href="/"><h1 className="text-3xl font-bold tracking-wide">HealthyFood3000</h1></Link>
+          <Link href="/">
+            <Image
+              src="/pic/logobanner.png"
+              alt="Logo Banner"
+              width={200}
+              height={50}
+            />
+          </Link>
+          {/* Hamburger Button */}
+          <div className="sm:hidden flex items-center" onClick={toggleMenu}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </div>
+
+          {/* Navbar Links */}
           <nav>
-            <ul className="flex space-x-6">
-              <li><Link href="/about" className="hover:underline hover:text-green-400 transition duration-300">Über uns</Link></li>
-              <li><a href="#products" className="hover:underline hover:text-green-400 transition duration-300">Produkte</a></li>
-              <li><a href="#contact" className="hover:underline hover:text-green-400 transition duration-300">Kontakt</a></li>
+            <ul className={`sm:flex ${isOpen ? 'block' : 'hidden'} space-x-6`}>
+              <li>
+                <Link href="/" className="hover:underline hover:text-green-400 transition duration-300">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:underline hover:text-green-400 transition duration-300">
+                  Über uns
+                </Link>
+              </li>
+              <li>
+                <Link href="/shop" className="hover:underline hover:text-green-400 transition duration-300">
+                  Shop
+                </Link>
+              </li>
+              <li>
+                <Link href="/#contact" className="hover:underline hover:text-green-400 transition duration-300">
+                  Beratung
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>
       </header>
+
 
       <main>
         {/* Hero Section */}
@@ -36,7 +89,14 @@ export default function Home() {
 
         <section id="products" className="bg-gray-100 py-16">
           <div className="container mx-auto px-4 text-center">
-            <h3 className="text-2xl font-semibold mb-6 text-gray-800">Unsere Produkte</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-gray-800">
+              Unsere Produkte
+              <span className="text-xs text-white bg-orange-500 py-1 px-2 rounded-full inline-block -mb-4 transform scale-75">
+                Favoriten
+              </span>
+            </h3>
+
+
             <p className="text-gray-600 mb-6">
               Entdecken Sie unser breites Sortiment an frischen, biologischen und nachhaltigen Lebensmitteln.
             </p>
@@ -76,9 +136,11 @@ export default function Home() {
                 <h4 className="text-lg font-bold mb-2 text-gray-800">Medium FoodBox</h4>
                 <p className="text-gray-600 mb-4">Organisiert, Grössere Auswahl, Frisch, gesund und nachhaltig – die perfekte Wahl für organisierte Ernährung.</p>
                 <p className="text-green-600 text-xl font-semibold">30 CHF / Monat</p>
-                <button className="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
-                  Abo abschliessen
-                </button>
+                <Link href={`/subscribe/MediumFoodBox`}>
+                  <button className="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
+                    Abo abschliessen
+                  </button>
+                </Link>
               </div>
 
               {/* FoodBox deluxe */}
@@ -92,12 +154,16 @@ export default function Home() {
                     className="object-cover rounded-lg w-full h-64 transition-transform duration-500 ease-in-out transform hover:scale-110"
                   />
                 </div>
-                <h4 className="text-lg font-bold mb-2 text-gray-800">Deluxe FoodBox</h4>
+                <h4 className="text-lg font-bold mb-2 text-gray-800">Deluxe FoodBox<span className="text-xs text-white bg-violet-500 py-1 px-2 rounded-full inline-block -mb-4 transform scale-75">
+                  Favorit
+                </span></h4>
                 <p className="text-gray-600 mb-4">Wellness, Spa, Obst, gesunde Gerichte, alles was man sich vorstellen kann – die perfekte Wahl für langfristige Gesundheit.</p>
                 <p className="text-green-600 text-xl font-semibold">100 CHF / Monat</p>
-                <button className="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
-                  Abo abschliessen
-                </button>
+                <Link href={`/subscribe/DeluxeFoodBox`}>
+                  <button className="mt-4 px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-all duration-300 transform hover:scale-105">
+                    Abo abschliessen
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -105,9 +171,9 @@ export default function Home() {
 
         <section id="contact" className="py-16 bg-gray-100">
           <div className="container mx-auto px-4 text-center">
-            <h3 className="text-2xl font-semibold mb-6 text-gray-800">Kontakt</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-gray-800">Beratung</h3>
             <p className="text-gray-600 mb-4">
-              Haben Sie Fragen? Kontaktieren Sie uns gerne!
+              Möchten sie eine persönliche Beratung für ihre Nährwerte haben oder haben Sie einfach Fragen? Kontaktieren Sie uns gerne!
             </p>
             <a
               href="mailto:info@healthyfood3000.com"
